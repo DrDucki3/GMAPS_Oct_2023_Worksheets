@@ -33,11 +33,19 @@ public class VectorExercises : MonoBehaviour
             Question3c();
         if (projection)
             Projection();
+
+        CalculateGameDimensions();
     }
 
     public void CalculateGameDimensions()
     {
+        GameHeight = Camera.main.orthographicSize * 2f;
+        GameWidth = Camera.main.aspect * GameHeight;
 
+        maxX = GameWidth / 2;
+        maxY = GameHeight / 2;
+        minX = -maxX;
+        minY = -maxY;
     }
 
     void Question2a()
@@ -55,12 +63,32 @@ public class VectorExercises : MonoBehaviour
 
     void Question2b(int n)
     {
+        for (int i = 0; i < n; i++)
+        {
+            float maxX = 5f;
+            float maxY = 5f;
 
+            startPt = new Vector2(
+                Random.Range(-maxX, maxX),
+                Random.Range(-maxY, maxY));
+
+            endPt = new Vector2(
+                Random.Range(-maxX, maxX),
+                Random.Range(-maxY, maxY));
+
+            drawnLine = lineFactory.GetLine(startPt, endPt, 0.02f, Color.black);
+
+            drawnLine.EnableDrawing(true);
+        }
     }
 
     void Question2d()
     {
-
+        DebugExtension.DebugArrow(
+            new Vector3(0, 0, 0),
+            new Vector3(5, 5, 0),
+            Color.red,
+            60f);
     }
 
     void Question2e(int n)
